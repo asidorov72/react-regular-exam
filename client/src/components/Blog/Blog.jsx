@@ -1,4 +1,4 @@
-export default function Body() {
+export default function Blog() {
     return (
         <div className="container px-4 px-lg-5">
             <div className="row gx-4 gx-lg-5 justify-content-center">
