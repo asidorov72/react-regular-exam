@@ -1,4 +1,4 @@
-import {createContext, useContext, useState} from "react";
+import {createContext, useContext} from "react";
 import useRequest from "../../hooks/useRequest.js";
 import usePersistedState from "../../hooks/usePersistedState.js";
 
@@ -19,7 +19,6 @@ const UserContext = createContext({
 export function UserProvider({
     children,
 }) {
-    // const [user, setUser] = useState(null);
     const [user, setUser] = usePersistedState(null);
     const { request } = useRequest();
 
@@ -35,6 +34,8 @@ export function UserProvider({
 
     const loginHandler = async (email, password) => {
         const result = await request('/users/login', 'POST', { email, password });
+
+        console.log("Login result");
         console.log(result);
 
         setUser(result);

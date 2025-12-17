@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import useRequest from "../../../hooks/useRequest.js";
-import formatDate from "../../../utils/dateUtil.js";
+import PostMeta from "./PostMeta.jsx";
 
 export default function PostDetails() {
     const { postId } = useParams();
@@ -11,15 +11,13 @@ export default function PostDetails() {
         _id,
         title,
         imageUrl,
+        _ownerId,
         content = { sections: [] },
         _createdOn,
         _updatedOn,
     } = post || {};
 
     const sections = content?.sections ?? [];
-
-    const dateMs = _updatedOn && _createdOn && _updatedOn > _createdOn ? _updatedOn : _createdOn;
-    const postedOnText = dateMs ? `Posted on ${formatDate(dateMs)}` : null;
 
     const ArticleWrapper = ({ children }) => (
         <article className="mb-4">
@@ -80,7 +78,11 @@ export default function PostDetails() {
                 <img className="img-fluid mb-4" src={imageUrl} alt={title || "Post image"} />
             )}
 
-            {postedOnText && <p className="post-meta">{postedOnText}</p>}
+            <PostMeta
+                _ownerId={_ownerId}
+                _createdOn={_createdOn}
+                _updatedOn={_updatedOn}
+            />
         </ArticleWrapper>
     );
 }
