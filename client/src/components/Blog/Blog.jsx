@@ -1,84 +1,75 @@
+import React from "react";
+import { useState } from "react";
+import PostPreview from "./Post/PostPreview.jsx";
+import useRequest from "../../hooks/useRequest.js";
+
+const PAGE_SIZE = 4;
+
 export default function Blog() {
-    return (
+    const [page, setPage] = useState(0);
+    const offset = page * PAGE_SIZE;
+    const url = `/data/clean_blog?sortBy=_createdOn%20desc&offset=${offset}&pageSize=${PAGE_SIZE}`;
+    const { data: clean_blog, loading, error } = useRequest(url, [page]);
+
+    const BlogWrapper = ({ children }) => (
         <div className="container px-4 px-lg-5">
             <div className="row gx-4 gx-lg-5 justify-content-center">
                 <div className="col-md-10 col-lg-8 col-xl-7">
-                    {/* Post preview*/}
-                    <div className="post-preview">
-                        <a href="post.html">
-                            <h2 className="post-title">
-                                Man must explore, and this is exploration at its greatest
-                            </h2>
-                            <h3 className="post-subtitle">
-                                Problems look mighty small from 150 miles up
-                            </h3>
-                        </a>
-                        <p className="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on September 24, 2023
-                        </p>
-                    </div>
-                    {/* Divider*/}
-                    <hr className="my-4" />
-                    {/* Post preview*/}
-                    <div className="post-preview">
-                        <a href="post.html">
-                            <h2 className="post-title">
-                                I believe every human has a finite number of heartbeats. I don't
-                                intend to waste any of mine.
-                            </h2>
-                        </a>
-                        <p className="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on September 18, 2023
-                        </p>
-                    </div>
-                    {/* Divider*/}
-                    <hr className="my-4" />
-                    {/* Post preview*/}
-                    <div className="post-preview">
-                        <a href="post.html">
-                            <h2 className="post-title">Science has not yet mastered prophecy</h2>
-                            <h3 className="post-subtitle">
-                                We predict too much for the next year and yet far too little for the
-                                next ten.
-                            </h3>
-                        </a>
-                        <p className="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on August 24, 2023
-                        </p>
-                    </div>
-                    {/* Divider*/}
-                    <hr className="my-4" />
-                    {/* Post preview*/}
-                    <div className="post-preview">
-                        <a href="post.html">
-                            <h2 className="post-title">Failure is not an option</h2>
-                            <h3 className="post-subtitle">
-                                Many say exploration is part of our destiny, but it’s actually our
-                                duty to future generations.
-                            </h3>
-                        </a>
-                        <p className="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on July 8, 2023
-                        </p>
-                    </div>
-                    {/* Divider*/}
-                    <hr className="my-4" />
-                    {/* Pager*/}
-                    <div className="d-flex justify-content-end mb-4">
-                        <a className="btn btn-primary text-uppercase" href="#!">
-                            Older Posts →
-                        </a>
-                    </div>
+                    {children}
                 </div>
             </div>
         </div>
+    );
+
+    if (loading) {
+        return (
+            <BlogWrapper>
+                <p className="no-articles">Loading...</p>
+            </BlogWrapper>
+        );
+    }
+
+    if (error) {
+        return (
+            <BlogWrapper>
+                <p className="no-articles">{error.message}</p>
+            </BlogWrapper>
+        );
+    }
+
+    const isLastPost = (idx) => {
+        if (idx === clean_blog?.length - 1) return true;
+        return false;
+    }
+
+    return (
+        <BlogWrapper>
+            {clean_blog.length === 0 && (<p className="no-articles">No posts yet!</p>)}
+            {clean_blog.map((post) => (
+                <React.Fragment key={post._id}>
+                    <PostPreview {...post} />
+                    {!isLastPost(clean_blog.indexOf(post)) && <hr className="my-4" />}
+                </React.Fragment>))
+            }
+
+            {/* Pager*/}
+            <div className="d-flex justify-content-between mb-4">
+                <button
+                    className="btn btn-primary text-uppercase"
+                    disabled={page === 0}
+                    onClick={() => setPage(p => Math.max(0, p - 1))}
+                >
+                    ← Newer Posts
+                </button>
+
+                <button
+                    className="btn btn-primary text-uppercase"
+                    disabled={clean_blog.length < PAGE_SIZE}
+                    onClick={() => setPage(p => p + 1)}
+                >
+                    Older Posts →
+                </button>
+            </div>
+        </BlogWrapper>
     );
 }
