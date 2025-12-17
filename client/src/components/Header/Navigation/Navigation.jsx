@@ -1,7 +1,9 @@
 import {useEffect, useRef} from "react";
 import {Link} from "react-router";
+import {useUserContext} from "../../../contexts/UserContext/UserContext.jsx";
 
 export default function Navigation() {
+    const { isAuthenticated } = useUserContext();
     const navRef = useRef(null);
 
     // Navigation on scroll effect
@@ -80,6 +82,28 @@ export default function Navigation() {
                                 Contact
                             </Link>
                         </li>
+                        {isAuthenticated
+                            ? (
+                                <>
+                                    <li className="nav-item">
+                                        <Link className="nav-link px-lg-3 py-3 py-lg-4" to="/posts/create">Add new Post</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link px-lg-3 py-3 py-lg-4" to="/logout">Logout</Link>
+                                    </li>
+                                </>
+                            )
+                            : (
+                                <>
+                                    <li className="nav-item">
+                                        <Link className="nav-link px-lg-3 py-3 py-lg-4" to="/login">Login</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link px-lg-3 py-3 py-lg-4" to="/register">Sign Up</Link>
+                                    </li>
+                                </>
+                            )
+                        }
                     </ul>
                 </div>
             </div>

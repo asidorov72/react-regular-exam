@@ -1,6 +1,9 @@
 import Navigation from "./Navigation/Navigation.jsx";
+import {useUserContext} from "../../contexts/UserContext/UserContext.jsx";
 
 export default function Header() {
+    const { isAuthenticated } = useUserContext();
+
     return (
         <>
             <Navigation />
