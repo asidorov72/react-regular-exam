@@ -76,11 +76,6 @@ export default function Navigation() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link px-lg-3 py-3 py-lg-4" to="/post">
-                                Sample Post
-                            </Link>
-                        </li>
-                        <li className="nav-item">
                             <Link className="nav-link px-lg-3 py-3 py-lg-4" to="/contact">
                                 Contact
                             </Link>

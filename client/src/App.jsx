@@ -3,7 +3,7 @@ import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import Blog from "./components/Blog/Blog.jsx";
 import About from "./components/About/About.jsx";
-import Post from "./components/Post/Post.jsx";
+import PostDetails from "./components/Blog/Post/PostDetails.jsx";
 import Contact from "./components/Contact/Contact.jsx";
 
 function App() {
@@ -13,8 +13,7 @@ function App() {
         <Routes>
             <Route path="/" element={<Blog />} />
             <Route path="/about" element={<About />} />
-            {/* Todo: add a dynamic single post route */}
-            <Route path="/post" element={<Post />} />
+            <Route path="/posts/:postId" element={<PostDetails />} />
             <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
@@ -22,4 +21,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
