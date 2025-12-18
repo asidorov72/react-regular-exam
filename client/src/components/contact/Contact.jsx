@@ -10,7 +10,7 @@ export default function Contact() {
                         </p>
                         <div className="my-5">
                             {/* * * * * * * * * * * * * * * **/}
-                            {/* * * SB Forms Contact Form * **/}
+                            {/* * * SB Forms contact Form * **/}
                             {/* * * * * * * * * * * * * * * **/}
                             {/* This form is pre-integrated with SB Forms.*/}
                             {/* To make this form functional, sign up at*/}

@@ -1,12 +1,12 @@
 import {useEffect, useRef} from "react";
 import {Link} from "react-router";
-import {useUserContext} from "../../../contexts/UserContext/UserContext.jsx";
+import {useUserContext} from "../../../contexts/UserContext.jsx";
 
 export default function Navigation() {
     const { isAuthenticated } = useUserContext();
     const navRef = useRef(null);
 
-    // Navigation on scroll effect
+    // navigation on scroll effect
     useEffect(() => {
         const mainNav = navRef.current;
         if (!mainNav) return;
@@ -99,7 +99,7 @@ export default function Navigation() {
                                         <Link className="nav-link px-lg-3 py-3 py-lg-4" to="/login">Login</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link className="nav-link px-lg-3 py-3 py-lg-4" to="/register">Sign Up</Link>
+                                        <Link className="nav-link px-lg-3 py-3 py-lg-4" to="/register">Registration</Link>
                                     </li>
                                 </>
                             )

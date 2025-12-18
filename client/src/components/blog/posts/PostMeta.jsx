@@ -1,5 +1,5 @@
 import formatDate from "../../../utils/dateUtil.js";
-import { useUserContext } from "../../../contexts/UserContext/UserContext.jsx";
+import { useUserContext } from "../../../contexts/UserContext.jsx";
 
 export default function PostMeta({ _ownerId, _createdOn, _updatedOn }) {
     const { user, isAuthenticated } = useUserContext();

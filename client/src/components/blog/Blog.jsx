@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import PostPreview from "./Post/PostPreview.jsx";
+import PostPreview from "./posts/PostPreview.jsx";
 import useRequest from "../../hooks/useRequest.js";
 
 const PAGE_SIZE = 4;

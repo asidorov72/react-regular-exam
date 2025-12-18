@@ -75,7 +75,7 @@ export default function PostDetails() {
             )}
 
             {imageUrl && (
-                <img className="img-fluid mb-4" src={imageUrl} alt={title || "Post image"} />
+                <img className="img-fluid mb-4" src={imageUrl} alt={title || "posts image"} />
             )}
 
             <PostMeta

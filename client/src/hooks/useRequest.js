@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import UserContext from "../contexts/UserContext/UserContext.jsx";
+import UserContext from "../contexts/UserContext.jsx";
 
 const BASE_URL = "http://localhost:3030";
 
