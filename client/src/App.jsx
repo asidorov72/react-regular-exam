@@ -8,6 +8,7 @@ import Contact from "./components/contact/Contact.jsx";
 import Login from "./components/auth/login/Login.jsx";
 import Logout from "./components/auth/logout/Logout.jsx";
 import Register from "./components/auth/register/Register.jsx";
+import PostCreate from "./components/blog/posts/PostCreate.jsx";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<Blog />} />
             <Route path="/about" element={<About />} />
             <Route path="/posts/:postId" element={<PostDetails />} />
+            <Route path="/posts/create" element={<PostCreate />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Register />} />
