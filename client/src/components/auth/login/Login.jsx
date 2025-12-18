@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router";
-import useForm from "../../hooks/useForm.js";
+import useForm from "../../../hooks/useForm.js";
 import {useContext} from "react";
-import UserContext from "../../contexts/UserContext/UserContext.jsx";
+import UserContext from "../../../contexts/UserContext.jsx";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -87,7 +87,7 @@ export default function Login() {
     //     <section id="login-page">
     //         <form id="login" action={formAction}>
     //             <div className="container">
-    //                 <h1>Login</h1>
+    //                 <h1>login</h1>
     //                 <label htmlFor="email">Email</label>
     //                 <input
     //                     type="email"
@@ -102,7 +102,7 @@ export default function Login() {
     //                     placeholder="Password"
     //                     {...register('password')}
     //                 />
-    //                 <input type="submit" className="btn submit" defaultValue="Login" />
+    //                 <input type="submit" className="btn submit" defaultValue="login" />
     //             </div>
     //         </form>
     //     </section>
