@@ -86,7 +86,7 @@ export default function Navigation() {
                             ? (
                                 <>
                                     <li className="nav-item">
-                                        <Link className="nav-link px-lg-3 py-3 py-lg-4" to="/posts/create">Add new Post</Link>
+                                        <Link className="nav-link px-lg-3 py-3 py-lg-4" to="/posts/create">Create New Post</Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link className="nav-link px-lg-3 py-3 py-lg-4" to="/logout">Logout</Link>
