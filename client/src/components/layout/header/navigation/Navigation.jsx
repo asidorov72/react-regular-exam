@@ -1,6 +1,6 @@
 import {useEffect, useRef} from "react";
 import {Link} from "react-router";
-import {useUserContext} from "../../../contexts/UserContext.jsx";
+import {useUserContext} from "../../../../contexts/UserContext.jsx";
 
 export default function Navigation() {
     const { isAuthenticated } = useUserContext();

@@ -11,7 +11,7 @@ export default function PostPreview({
 }) {
     return (
         <div className="post-preview">
-            <Link to={`/posts/${_id}`}>
+            <Link to={`/posts/${_id}/details`}>
                 <h2 className="post-title">{title}</h2>
                 {subtitle !== '' && <h3 className="post-subtitle">{subtitle}</h3>}
             </Link>
