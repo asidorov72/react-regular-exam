@@ -3,6 +3,7 @@ import useRequest from "../../../hooks/useRequest.js";
 import PostMeta from "./PostMeta.jsx";
 import React from "react";
 import useIsOwner from "../../../hooks/useIsOwner.js";
+import PostWrapper from "./PostWrapper.jsx";
 
 export default function PostDetails() {
     const { postId } = useParams();
@@ -22,39 +23,27 @@ export default function PostDetails() {
     const sections = content?.sections ?? [];
     const isOwner = useIsOwner(_ownerId);
 
-    const ArticleWrapper = ({ children }) => (
-        <article className="mb-4">
-            <div className="container px-4 px-lg-5">
-                <div className="row gx-4 gx-lg-5 justify-content-center">
-                    <div className="col-md-10 col-lg-8 col-xl-7">
-                        {children}
-                    </div>
-                </div>
-            </div>
-        </article>
-    );
-
     if (loading) {
         return (
-            <ArticleWrapper>
+            <PostWrapper>
                 <p className="no-articles">Loading...</p>
-            </ArticleWrapper>
+            </PostWrapper>
         );
     }
 
     if (error) {
         return (
-            <ArticleWrapper>
+            <PostWrapper>
                 <p className="no-articles">{error.message}</p>
-            </ArticleWrapper>
+            </PostWrapper>
         );
     }
 
     if (!_id) {
         return (
-            <ArticleWrapper>
+            <PostWrapper>
                 <p className="no-articles">Post not found.</p>
-            </ArticleWrapper>
+            </PostWrapper>
         );
     }
 
@@ -76,8 +65,7 @@ export default function PostDetails() {
     }
 
     return (
-
-        <ArticleWrapper>
+        <PostWrapper>
             {sections.length === 0 ? (
                 <p className="no-articles">No content posted yet.</p>
             ) : (
@@ -123,6 +111,6 @@ export default function PostDetails() {
                 </div>
             )}
 
-        </ArticleWrapper>
+        </PostWrapper>
     );
 }
