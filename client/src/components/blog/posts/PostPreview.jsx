@@ -1,7 +1,8 @@
 import {Link} from "react-router";
 import PostMeta from "./PostMeta.jsx";
+import React from "react";
 
-export default function PostPreview({
+function PostPreview({
     _id,
     title,
     subtitle,
@@ -23,3 +24,5 @@ export default function PostPreview({
         </div>
     )
 }
+
+export default React.memo(PostPreview);

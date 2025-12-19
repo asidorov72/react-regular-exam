@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import { useState } from "react";
 import PostPreview from "./posts/PostPreview.jsx";
 import useRequest from "../../hooks/useRequest.js";
@@ -9,8 +9,13 @@ const PAGE_SIZE = 4;
 export default function Blog() {
     const [page, setPage] = useState(0);
     const offset = page * PAGE_SIZE;
-    const url = `/data/clean_blog?sortBy=_createdOn%20desc&offset=${offset}&pageSize=${PAGE_SIZE}`;
-    const { data: clean_blog, loading, error } = useRequest(url, [page]);
+
+    // useRequest will look into the modified url
+    const url = useMemo(() => (
+        `/data/clean_blog?sortBy=_createdOn%20desc&offset=${offset}&pageSize=${PAGE_SIZE}`
+    ), [offset]);
+
+    const { data: clean_blog = [], loading, error } = useRequest(url, [page]);
 
     if (loading) {
         return (
