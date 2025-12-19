@@ -1,8 +1,9 @@
 import formatDate from "../../../utils/dateUtil.js";
 import { useUserContext } from "../../../contexts/UserContext.jsx";
 import useIsOwner from "../../../hooks/useIsOwner.js";
+import React from "react";
 
-export default function PostMeta({ _ownerId, _createdOn, _updatedOn }) {
+function PostMeta({ _ownerId, _createdOn, _updatedOn }) {
     const { user } = useUserContext();
     const isOwner = useIsOwner(_ownerId);
 
@@ -14,12 +15,6 @@ export default function PostMeta({ _ownerId, _createdOn, _updatedOn }) {
     const postedOnDate = formatDate(dateMs);
 
     return (
-        // <p className="post-meta">
-        //     {isOwner && <>Posted by {user.email}</>}
-        //     {!isOwner && <>Posted on {postedOnDate}</>}
-        //     {isOwner && <> on {postedOnDate}</>}
-        // </p>
-
         <p className="post-meta">
             {isOwner
                 ? <>Posted by {user.email} on {postedOnDate}</>
@@ -28,3 +23,5 @@ export default function PostMeta({ _ownerId, _createdOn, _updatedOn }) {
         </p>
     );
 }
+
+export default React.memo(PostMeta);

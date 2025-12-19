@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function PostWrapper({children}) {
+function PostWrapper({children}) {
     return (
         <article className="mb-4">
             <div className="container px-4 px-lg-5">
@@ -13,3 +13,5 @@ export default function PostWrapper({children}) {
         </article>
     );
 }
+
+export default React.memo(PostWrapper);

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function BlogWrapper({children}) {
+function BlogWrapper({children}) {
     return (
         <div className="container px-4 px-lg-5">
             <div className="row gx-4 gx-lg-5 justify-content-center">
@@ -11,3 +11,5 @@ export default function BlogWrapper({children}) {
         </div>
     );
 }
+
+export default React.memo(BlogWrapper);
