@@ -125,7 +125,7 @@ export default function PostCreate() {
                                     </div>
                                 ))}
 
-                                <button className="btn btn-primary text-uppercase" type="submit">
+                                <button className="btn btn-outline-secondary text-uppercase" type="submit">
                                     Create Post
                                 </button>
 

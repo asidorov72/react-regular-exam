@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import PostPreview from "./posts/PostPreview.jsx";
 import useRequest from "../../hooks/useRequest.js";
+import BlogWrapper from "./BlogWrapper.jsx";
 
 const PAGE_SIZE = 4;
 
@@ -10,16 +11,6 @@ export default function Blog() {
     const offset = page * PAGE_SIZE;
     const url = `/data/clean_blog?sortBy=_createdOn%20desc&offset=${offset}&pageSize=${PAGE_SIZE}`;
     const { data: clean_blog, loading, error } = useRequest(url, [page]);
-
-    const BlogWrapper = ({ children }) => (
-        <div className="container px-4 px-lg-5">
-            <div className="row gx-4 gx-lg-5 justify-content-center">
-                <div className="col-md-10 col-lg-8 col-xl-7">
-                    {children}
-                </div>
-            </div>
-        </div>
-    );
 
     if (loading) {
         return (
