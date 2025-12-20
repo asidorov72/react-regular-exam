@@ -11,7 +11,10 @@ export default function useRequest(url, initialState) {
     const [error, setError] = useState(null);
 
     const request = async (url, method = "GET", data, config = {}) => {
-        let options = { method };
+        const options = {
+            method,
+            signal: config.signal, // AbortController signal
+        };
 
         if (data) {
             options.headers = { "Content-Type": "application/json" };
@@ -44,16 +47,34 @@ export default function useRequest(url, initialState) {
     useEffect(() => {
         if (!url) return;
 
+        const controller = new AbortController();
+
         setLoading(true);
         setError(null);
 
-        request(url)
+        request(url, "GET", null, { signal: controller.signal })
             .then((result) => setData(result))
             .catch((err) => {
+                if (err.name === "AbortError") return;
                 setError(err);
-                // alert(err.message);
             })
-            .finally(() => setLoading(false));
+            .finally(() => {
+                // if the request was aborted, don't set loading to false'
+                if (controller.signal.aborted) return;
+                setLoading(false);
+            });
+
+        // cleanup: abort the request when the url or component unmounts
+        // Steps:
+        // 1. В cleanup вызывается abort
+        // 2. controller.signal.aborted === true
+        // 3. fetch «слушает» signal
+        // 4. браузер немедленно прерывает сетевой запрос
+        // 5. fetch Promise reject’ится
+        // 6. Эта ошибка попадает в .catch(err => …) и становится "AbortError"
+        // Очень важно: AbortError — это НЕ ошибка приложения
+        // Это нормальный сценарий управления жизненным циклом.
+        return () => controller.abort();
     }, [url]);
 
     return {
