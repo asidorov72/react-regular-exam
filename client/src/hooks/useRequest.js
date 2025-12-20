@@ -55,7 +55,10 @@ export default function useRequest(url, initialState) {
         request(url, "GET", null, { signal: controller.signal })
             .then((result) => setData(result))
             .catch((err) => {
-                if (err.name === "AbortError") return;
+                if (err.name === "AbortError") {
+                    console.log("Request aborted.");
+                    return;
+                }
                 setError(err);
             })
             .finally(() => {
